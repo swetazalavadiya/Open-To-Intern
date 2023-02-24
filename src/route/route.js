@@ -2,7 +2,6 @@ const express= require('express')
 const router = express.Router();
 const collegeController=require("../controller/collegeController")
 const internController=require("../controller/internController");
-const collegeModel = require('../Model/collegeModel');
 
 router.get('/test', function (req, res){
     console.log("hi I'm sweta")

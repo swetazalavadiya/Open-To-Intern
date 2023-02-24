@@ -27,6 +27,8 @@ const createCollegeData = async function (req, res) {
 }
 
 const getDetails= async function(req,res){
+    
+    try{
     let collegeName = req.query.collegeName
     let filtercollege= await collegeModel.findOne({name:collegeName})
 
@@ -34,9 +36,11 @@ const getDetails= async function(req,res){
     let collegelogo=filtercollege.logoLink
     let collegeId=filtercollege._id
 
-    let filterintern= await internModel.find({collegeId:collegeId}).select({_id:1, name:1, email:1, mobile:1})
-    res.status(200).send({status:true, data:{name:collegeName, fullname:collegefullname, logoLink:collegelogo, interns:filterintern}})
-
+    let filterintern= await internModel.find({collegeId:collegeId}).select({_id:1, Name:1, email:1, mobile:1})
+    res.status(201).send({status:true, data:{name:collegeName, fullname:collegefullname, logoLink:collegelogo, interns:filterintern}})
+    }catch(error){
+        res.status(500).send({ status: false, message: error.message, message: " server error" })
+    }
 }
 module.exports.createCollegeData=createCollegeData
 module.exports.getDetails=getDetails
